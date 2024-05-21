@@ -1,2 +1,2 @@
 # chatgpt-img-generator
-Generate image with ChatGPT API
+Generate image with ChatGPT API with Docker, PHP and JS
