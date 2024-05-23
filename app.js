@@ -1,7 +1,22 @@
-const API_KEY = "<YOUR_API-KEY>";
-const submitIcon = document.querySelector("#submit-icon")
-const inputElement = document.querySelector("input")
+const API_KEY = "YOUR_CHATGPT_API_KEY";
+const submitIcon = document.querySelector("#submit-icon");
+const inputElement = document.querySelector("input");
 const imageSection = document.querySelector(".images-section");
+const loader = document.querySelector("#loading");
+
+// showing spinner
+function displayLoading() {
+    loader.classList.add("display");
+    //to stop loading after some time
+    setTimeout(() => {
+        loader.classList.remove("display");
+    }, 9000);
+}
+
+//hidding loading
+function hideLoading() {
+    loader.classList.remove("display");
+}
 
 const getImages = async() => {
 
@@ -16,12 +31,15 @@ const getImages = async() => {
             "n": 4,
             "size": "1024x1024"
         })
-    }
+    };
+
+    displayLoading();
+
 
     try {
         const response = await fetch("https://api.openai.com/v1/images/generations", options)
-        const data = await  response.json();
-        console.log(data)
+        const data = await response.json();
+        hideLoading();
 
         data?.data.forEach(obj => {
 
@@ -36,7 +54,7 @@ const getImages = async() => {
 
     } catch (error) {
         console.error(error)
-    }
+    };
 }
 
 
